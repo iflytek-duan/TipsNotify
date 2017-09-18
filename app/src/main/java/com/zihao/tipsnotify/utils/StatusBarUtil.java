@@ -83,14 +83,14 @@ public class StatusBarUtil {
         int result = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (MIUISetStatusBarLightMode(activity.getWindow(), true)) {
-                result = 1;
+                result = TYPE_MIUI;
             } else if (FlymeSetStatusBarLightMode(activity.getWindow(), true)) {
-                result = 2;
+                result = TYPE_FLYME;
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 activity.getWindow().getDecorView().
                         setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                                 | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                result = 3;
+                result = TYPE_ANDROID_M;
             }
         }
         return result;
