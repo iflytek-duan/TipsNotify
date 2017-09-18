@@ -34,16 +34,16 @@ public class NotificationUtil {
     /**
      * 显示(推送)一个通知
      *
-     * @param context context
+     * @param context      context
+     * @param contentTitle 通知的标题
+     * @param contentText  通知的内容概述
+     * @param tickerText   通知发出且用户还未下拉通知栏时通知在通知栏上展示的信息
      */
-    public void showNotification(Context context) {
+    public void showNotification(Context context, CharSequence contentTitle, CharSequence contentText,
+                                 CharSequence tickerText) {
         if (notificationManager == null) {
             notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         }
-
-        CharSequence contentTitle = "南山大夫";
-        CharSequence contentText = "正在进行南山颈舒模式一推拿治疗，点击返回治疗";
-        CharSequence tickerText = "tickerText";
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
