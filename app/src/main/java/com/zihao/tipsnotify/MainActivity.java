@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showNotification(final Context context) {
-        NotificationUtil.getInstance().showNotification(context, "黑诶嘿嘿",
-                "正在进行xxxx模式一推拿治疗，点击返回治疗", "tickerText");
+        NotificationUtil.getInstance().showNotification(context, MainActivity.class, R.mipmap.ic_launcher,
+                "黑诶嘿嘿", "正在进行xxxx模式一推拿治疗，点击返回治疗", "tickerText");
         statusHandler.post(statusRb);
     }
 

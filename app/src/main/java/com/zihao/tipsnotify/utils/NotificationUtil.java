@@ -6,9 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.zihao.tipsnotify.MainActivity;
-import com.zihao.tipsnotify.R;
-
 /**
  * ClassName：NotificationUtil
  * Description：TODO<通知栏工具类>
@@ -35,11 +32,13 @@ public class NotificationUtil {
      * 显示(推送)一个通知
      *
      * @param context      context
+     * @param cls          class对象--用于PendingIntent指定意向类
+     * @param icon         通知左侧的图标
      * @param contentTitle 通知的标题
      * @param contentText  通知的内容概述
      * @param tickerText   通知发出且用户还未下拉通知栏时通知在通知栏上展示的信息
      */
-    public void showNotification(Context context, CharSequence contentTitle, CharSequence contentText,
+    public void showNotification(Context context, Class<?> cls, int icon, CharSequence contentTitle, CharSequence contentText,
                                  CharSequence tickerText) {
         if (notificationManager == null) {
             notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -47,10 +46,10 @@ public class NotificationUtil {
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(context.getPackageName(), MainActivity.class.getName());
+        intent.setClassName(context.getPackageName(), cls.getName());
         PendingIntent pi = PendingIntent.getActivity(context, 0, intent, 0);
 
-        Notification notification = builderNotification(context, contentTitle, contentText, tickerText, pi);
+        Notification notification = builderNotification(context, icon, contentTitle, contentText, tickerText, pi);
         notificationManager.notify(0, notification);
     }
 
@@ -86,18 +85,19 @@ public class NotificationUtil {
      * 构建一个通知对象
      *
      * @param context       context
+     * @param icon          通知左侧的图标
      * @param contentTitle  通知的标题
      * @param contentText   通知的内容概述
      * @param tickerText    通知发出且用户还未下拉通知栏时通知在通知栏上展示的信息
      * @param pendingIntent pendingIntent 用户定义的填充意向
      * @return Notification
      */
-    private Notification builderNotification(Context context, CharSequence contentTitle,
+    private Notification builderNotification(Context context, int icon, CharSequence contentTitle,
                                              CharSequence contentText, CharSequence tickerText,
                                              PendingIntent pendingIntent) {
         Notification.Builder builder = new Notification.Builder(context)
                 .setTicker(tickerText)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(icon)
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle(contentTitle)
                 .setContentText(contentText);
