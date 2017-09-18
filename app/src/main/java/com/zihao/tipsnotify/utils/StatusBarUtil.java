@@ -31,7 +31,7 @@ public class StatusBarUtil {
     /**
      * 修改状态栏为全透明
      *
-     * @param activity
+     * @param activity activity
      */
     @TargetApi(19)
     public static void transparencyBar(Activity activity) {
